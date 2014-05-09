@@ -19,13 +19,16 @@ main = do
     -- get list of line numbers for each word in index and print result 
     mapM print (generateIndex index word)
     
+-- only allow letters and spaces, then conver to lowercase    
 normalise :: String -> String
 normalise = filter (\x -> Char.isLetter x || Char.isSpace x) . map Char.toLower
 
+-- create an index for a list of words
 generateIndex :: [String] -> [[String]] -> [(String, [Int])]
 generateIndex [] y = []
 generateIndex (x:xs) y = [(x, getLineNumbers x y)] ++ (generateIndex xs y)
 
+-- return a list of line numbers that contain a word
 getLineNumbers' :: String -> [[String]] -> Int -> [Int]
 getLineNumbers' x [] n = []
 getLineNumbers' x (y:ys) n
